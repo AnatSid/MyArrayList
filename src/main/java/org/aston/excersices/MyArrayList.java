@@ -43,7 +43,7 @@ public class MyArrayList<T> implements MyList<T> {
      * @throws IndexOutOfBoundsException if the index is out of range
      */
     @Override
-    public void addAtIndex(int index, T someObject) {
+    public void add(int index, T someObject) {
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
@@ -72,7 +72,7 @@ public class MyArrayList<T> implements MyList<T> {
      * @param someObject the element to be removed
      */
     @Override
-    public void removeByValue(T someObject) {
+    public void remove(T someObject) {
         for (int i = 0; i < size; i++) {
             if (array[i].equals(someObject)) {
                 removeAtIndex(i);

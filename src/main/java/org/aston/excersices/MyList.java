@@ -25,7 +25,7 @@ public interface MyList<T> extends Iterable<T> {
      * @param t     the element to add
      * @throws IndexOutOfBoundsException if the index is out of range
      */
-    void addAtIndex(int index, T t);
+    void add(int index, T t);
 
     /**
      * Replaces the element at the specified index with the specified element.
@@ -51,7 +51,7 @@ public interface MyList<T> extends Iterable<T> {
      *
      * @param t the element to be removed
      */
-    void removeByValue(T t);
+    void remove(T t);
 
     /**
      * Removes the element at the specified index from the list.

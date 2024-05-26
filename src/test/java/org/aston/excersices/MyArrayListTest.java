@@ -35,7 +35,7 @@ class MyArrayListTest {
     public void shouldInsertElementAtCorrectIndex() {
         myArrayList.add(1);
         myArrayList.add(3);
-        myArrayList.addAtIndex(1, 2);
+        myArrayList.add(1, 2);
         Assertions.assertEquals(2, myArrayList.get(1));
         Assertions.assertEquals(3, myArrayList.size());
     }
@@ -45,7 +45,7 @@ class MyArrayListTest {
         myArrayList.add(1);
         myArrayList.add(2);
         myArrayList.add(3);
-        myArrayList.removeByValue(2);
+        myArrayList.remove(2);
         Assertions.assertEquals(2, myArrayList.size());
         Assertions.assertEquals(3, myArrayList.get(1));
     }
@@ -93,19 +93,19 @@ class MyArrayListTest {
     }
 
     @Test
-    void shouldThrowExceptionWhenGetOutOfBounds() {
+    void shouldThrowExceptionWhenGetAtNonExistentIndex() {
         myArrayList.add(1);
         Assertions.assertThrows(IndexOutOfBoundsException.class, () -> myArrayList.get(1));
     }
 
     @Test
-    void shouldThrowExceptionWhenRemoveAtIndexOutOfBounds() {
+    void shouldThrowExceptionWhenRemoveAtNonExistentIndex() {
         myArrayList.add(1);
         Assertions.assertThrows(IndexOutOfBoundsException.class, () -> myArrayList.removeAtIndex(1));
     }
 
     @Test
-    void shouldThrowExceptionWhenSetOutOfBounds() {
+    void shouldThrowOutOfBoundsWhenSetAtNonExistentIndex() {
         myArrayList.add(1);
         Assertions.assertThrows(IndexOutOfBoundsException.class, () -> myArrayList.set(10, 3));
     }
