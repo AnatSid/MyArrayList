@@ -1,4 +1,4 @@
-package org.example;
+package org.aston.excersices;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -36,6 +36,7 @@ public class MyArrayList<T> implements MyList<T> {
 
     /**
      * Adds an element at the specified index in the list.
+     * Shifts the element currently at that position (if any) and any subsequent elements to the right.
      *
      * @param index      the index at which to add the element
      * @param someObject the element to add
@@ -71,7 +72,7 @@ public class MyArrayList<T> implements MyList<T> {
      * @param someObject the element to be removed
      */
     @Override
-    public void remove(T someObject) {
+    public void removeByValue(T someObject) {
         for (int i = 0; i < size; i++) {
             if (array[i].equals(someObject)) {
                 removeAtIndex(i);
@@ -131,30 +132,6 @@ public class MyArrayList<T> implements MyList<T> {
     }
 
     /**
-     * Checks if the specified index is within the valid range of the list.
-     * Throws an IndexOutOfBoundsException if the index is invalid.
-     *
-     * @param index the index to check
-     * @throws IndexOutOfBoundsException if the index is out of range
-     */
-    private void checkIndex(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException();
-        }
-    }
-
-    /**
-     * Increases the capacity of the array if the current size equals the array's length.
-     * Doubles the array's capacity by creating a new array and copying elements into it.
-     * This method is called internally when adding elements to the list.
-     */
-    public void increaseArray() {
-        if (size >= array.length) {
-            array = Arrays.copyOf(array, array.length * 2);
-        }
-    }
-
-    /**
      * Sorts the elements of the list using the specified comparator.
      * Uses the quicksort algorithm.
      *
@@ -164,15 +141,6 @@ public class MyArrayList<T> implements MyList<T> {
         quicksort(0, size - 1, comparator);
     }
 
-    /**
-     * Performs the quicksort algorithm on the array.
-     * Recursively divides the array into sub-arrays, sorting each sub-array independently.
-     * Uses the partition method to determine pivot positions.
-     *
-     * @param low        the starting index of the sub-array
-     * @param high       the ending index of the sub-array
-     * @param comparator the comparator to determine the order of elements
-     */
     private void quicksort(int low, int high, Comparator<? super T> comparator) {
         if (low < high) {
             int pivotIndex = partition(low, high, comparator);
@@ -181,16 +149,6 @@ public class MyArrayList<T> implements MyList<T> {
         }
     }
 
-    /**
-     * Partitions the array for the quicksort algorithm.
-     * Uses the last element as the pivot, rearranging elements so that elements less than
-     * or equal to the pivot are on the left side, and elements greater than the pivot are on the right side.
-     *
-     * @param low        the starting index of the partition
-     * @param high       the ending index of the partition
-     * @param comparator the comparator to determine the order of elements
-     * @return the index of the pivot after partitioning
-     */
     private int partition(int low, int high, Comparator<? super T> comparator) {
         T pivot = array[high];
         int i = low - 1;
@@ -204,16 +162,22 @@ public class MyArrayList<T> implements MyList<T> {
         return i + 1;
     }
 
-    /**
-     * Swaps two elements in the array at the specified indices.
-     *
-     * @param i the index of the first element to swap
-     * @param j the index of the second element to swap
-     */
     private void swap(int i, int j) {
         T temp = array[i];
         array[i] = array[j];
         array[j] = temp;
+    }
+
+    private void checkIndex(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
+    private void increaseArray() {
+        if (size >= array.length) {
+            array = Arrays.copyOf(array, array.length * 2);
+        }
     }
 
     /**

@@ -1,4 +1,4 @@
-package org.example;
+package org.aston.excersices;
 
 import java.util.Comparator;
 
@@ -9,6 +9,7 @@ import java.util.Comparator;
  * @param <T> the type of elements stored in the list
  */
 public interface MyList<T> extends Iterable<T> {
+
     /**
      * Adds an element to the end of the list.
      *
@@ -27,6 +28,15 @@ public interface MyList<T> extends Iterable<T> {
     void addAtIndex(int index, T t);
 
     /**
+     * Replaces the element at the specified index with the specified element.
+     *
+     * @param index   the index of the element to replace
+     * @param element the new element to be stored at the specified index
+     * @throws IndexOutOfBoundsException if the index is out of range
+     */
+    void set(int index, T element);
+
+    /**
      * Gets the element at the specified index.
      *
      * @param index the index of the element to retrieve
@@ -41,7 +51,7 @@ public interface MyList<T> extends Iterable<T> {
      *
      * @param t the element to be removed
      */
-    void remove(T t);
+    void removeByValue(T t);
 
     /**
      * Removes the element at the specified index from the list.
@@ -51,15 +61,6 @@ public interface MyList<T> extends Iterable<T> {
      * @throws IndexOutOfBoundsException if the index is out of range
      */
     void removeAtIndex(int index);
-
-    /**
-     * Replaces the element at the specified index with the specified element.
-     *
-     * @param index   the index of the element to replace
-     * @param element the new element to be stored at the specified index
-     * @throws IndexOutOfBoundsException if the index is out of range
-     */
-    void set(int index, T element);
 
     /**
      * Returns the number of elements in the list.

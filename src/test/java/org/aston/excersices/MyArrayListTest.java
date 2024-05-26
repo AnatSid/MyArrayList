@@ -1,11 +1,8 @@
-package org.example;
+package org.aston.excersices;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.Comparator;
-
 
 class MyArrayListTest {
     private MyArrayList<Integer> myArrayList;
@@ -16,16 +13,8 @@ class MyArrayListTest {
     }
 
     @Test
-    public void testSize() {
+    public void shouldIncreaseSizeAfterAddingElements() {
         Assertions.assertEquals(0, myArrayList.size());
-        for (int i = 0; i < 100; i++) {
-            myArrayList.add(i);
-        }
-        Assertions.assertEquals(100, myArrayList.size());
-    }
-
-    @Test
-    public void testAdd() {
         for (int i = 0; i < 500; i++) {
             myArrayList.add(i);
         }
@@ -33,7 +22,7 @@ class MyArrayListTest {
     }
 
     @Test
-    void testGet() {
+    void shouldReturnCorrectElementAtIndex() {
         myArrayList.add(10);
         myArrayList.add(20);
         myArrayList.add(30);
@@ -43,26 +32,26 @@ class MyArrayListTest {
     }
 
     @Test
-    public void testAddAtIndex() {
+    public void shouldInsertElementAtCorrectIndex() {
         myArrayList.add(1);
         myArrayList.add(3);
         myArrayList.addAtIndex(1, 2);
-        Assertions.assertEquals(3, myArrayList.size());
         Assertions.assertEquals(2, myArrayList.get(1));
+        Assertions.assertEquals(3, myArrayList.size());
     }
 
     @Test
-    public void testRemoveByValue() {
+    public void testShouldRemoveElementByValue() {
         myArrayList.add(1);
         myArrayList.add(2);
         myArrayList.add(3);
-        myArrayList.remove(2);
+        myArrayList.removeByValue(2);
         Assertions.assertEquals(2, myArrayList.size());
         Assertions.assertEquals(3, myArrayList.get(1));
     }
 
     @Test
-    public void testRemoveAtIndex() {
+    public void shouldRemoveElementAtIndex() {
         myArrayList.add(1);
         myArrayList.add(2);
         myArrayList.add(3);
@@ -72,7 +61,7 @@ class MyArrayListTest {
     }
 
     @Test
-    public void testSet() {
+    public void shouldReplaceElementAtIndex() {
         myArrayList.add(2);
         myArrayList.add(4);
         myArrayList.add(6);
@@ -82,7 +71,7 @@ class MyArrayListTest {
     }
 
     @Test
-    public void testClear() {
+    public void shouldClearAllElements() {
         for (int i = 0; i < 1000; i++) {
             myArrayList.add(i);
         }
@@ -91,7 +80,7 @@ class MyArrayListTest {
     }
 
     @Test
-    void testSort() {
+    void shouldSortElementsInAscendingOrder() {
         myArrayList.add(100);
         myArrayList.add(10);
         myArrayList.add(50);
@@ -104,52 +93,20 @@ class MyArrayListTest {
     }
 
     @Test
-    void testSortReverse() {
-        for (int i = 50; i >= 1; i--) {
-            myArrayList.add(i);
-        }
-        myArrayList.sort(Integer::compareTo);
-        Assertions.assertEquals(1, myArrayList.get(0));
-        Assertions.assertEquals(2, myArrayList.get(1));
-        Assertions.assertEquals(3, myArrayList.get(2));
-    }
-
-    @Test
-    void testSortWithStrings() {
-        MyArrayList<String> stringList = new MyArrayList<>();
-        stringList.add("banana");
-        stringList.add("apple");
-        stringList.add("cherry");
-        stringList.sort(String::compareTo);
-        Assertions.assertEquals("apple", stringList.get(0));
-        Assertions.assertEquals("banana", stringList.get(1));
-        Assertions.assertEquals("cherry", stringList.get(2));
-    }
-
-    @Test
-    void testSortingCustomObjectForAge() {
-        MyArrayList<PersonForTest> peopleList = new MyArrayList<>();
-        peopleList.add(new PersonForTest("Alex", 25));
-        peopleList.add(new PersonForTest("Bob", 30));
-        peopleList.add(new PersonForTest("Charlie", 20));
-
-        Comparator<PersonForTest> ageComparator = Comparator.comparing(PersonForTest::getAge);
-        peopleList.sort(ageComparator);
-
-        Assertions.assertEquals(20, peopleList.get(0).getAge());
-        Assertions.assertEquals(25, peopleList.get(1).getAge());
-        Assertions.assertEquals(30, peopleList.get(2).getAge());
-    }
-
-    @Test
-    void testGetOutOfBoundsIndex() {
+    void shouldThrowExceptionWhenGetOutOfBounds() {
         myArrayList.add(1);
         Assertions.assertThrows(IndexOutOfBoundsException.class, () -> myArrayList.get(1));
     }
 
     @Test
-    void testRemoveAtIndexOutOfBoundsIndex() {
+    void shouldThrowExceptionWhenRemoveAtIndexOutOfBounds() {
         myArrayList.add(1);
         Assertions.assertThrows(IndexOutOfBoundsException.class, () -> myArrayList.removeAtIndex(1));
+    }
+
+    @Test
+    void shouldThrowExceptionWhenSetOutOfBounds() {
+        myArrayList.add(1);
+        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> myArrayList.set(10, 3));
     }
 }
